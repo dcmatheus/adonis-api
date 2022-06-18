@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
-import Comment from './Moment'
+import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Comment from './Comment'
 
 export default class Moment extends BaseModel {
   @hasMany(() => Comment)
