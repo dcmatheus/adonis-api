@@ -33,15 +33,15 @@ export default class MomentsController {
   }
 
   public async index() {
-    const moments = await Moment.all()
-    const momentsWithoutId = moments.map(({ $attributes: { id, ...moment } }) => moment)
+    const moments = await Moment.query().preload('comments')
     return {
-      data: momentsWithoutId,
+      data: moments,
     }
   }
 
   public async show({ params }: HttpContextContract) {
-    const { id, ...moment } = (await Moment.findOrFail(params.id))['$attributes']
+    const moment = await Moment.findOrFail(params.id)
+    await moment.load('comments')
     return {
       data: moment,
     }
